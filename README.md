@@ -30,6 +30,7 @@ Response :
 # Get Item by id
 
 GET -  http://localhost:8200/order/item/{id}   or   http://localhost:8200/order/item/11102 
+
 Response : 
 {
     "id": 11102,
@@ -40,6 +41,7 @@ Response :
 
 # Get Item by code
 GET -  http://localhost:8200/order/item/getbycode/{productcode}   or http://localhost:8200/order/item/getbycode/CR
+
 Response : 
 {
     "id": 11101,
@@ -51,6 +53,7 @@ Response :
 # Get Item by product name 
 
 GET -  http://localhost:8200/order/item/getitembyname/{productname}   or  http://localhost:8200/order/item/getitembyname/Pen%20Drive
+
 Response : 
 {
     "id": 11102,
@@ -61,6 +64,7 @@ Response :
 
 # update Item Object
 PUT -  http://localhost:8200/order/item/update
+
 Request Json : 
 	  {
 		"id": 11101,
