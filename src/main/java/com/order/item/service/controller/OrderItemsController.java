@@ -8,52 +8,48 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.order.item.service.OrderItemUpdateRequest;
 import com.order.item.service.entity.OrderItem;
-import com.order.item.service.repository.OrderItemRepository;
-
-
+import com.order.item.service.model.OrderItemsServices;
 
 @RestController
+@RequestMapping("/order")
 public class OrderItemsController {
 	@Autowired
-	private OrderItemRepository orderItemRepository;
+	private OrderItemsServices orderItemsServices;
 
-	@GetMapping("/order-items")
+	@GetMapping("/items")
 	public List<OrderItem> getListOrderItems() {
-		return orderItemRepository.findAll();
+		return orderItemsServices.getListOrderItems();
 
 	}
 
-	@GetMapping("/itembyid/{id}")
+	@GetMapping("/item/{id}")
 	public OrderItem getItemsById(@PathVariable("id") Integer id) {
 
-		return orderItemRepository.findByIdOrProductNameOrProductCode(id, "", "");
+		return orderItemsServices.getItemsById(id);
 
 	}
 
-	@GetMapping("/itembycode/{productCode}")
-	public OrderItem getItemsByCode(@PathVariable("productCode") String productCode) {
-		return orderItemRepository.findByIdOrProductNameOrProductCode(null, null, productCode);
+	@GetMapping("/item/getbycode/{productcode}")
+	public OrderItem getItemsByCode(@PathVariable("productcode") String productCode) {
+		return orderItemsServices.getItemsByCode(productCode);
 
 	}
 
-	@GetMapping("/itembyname/{productName}")
-	public OrderItem getItemsByName(@PathVariable("productName") String productName) {
-		return orderItemRepository.findByIdOrProductNameOrProductCode(null, productName, null);
+	@GetMapping("/item/getitembyname/{productname}")
+	public OrderItem getItemsByName(@PathVariable("productname") String productName) {
+		return orderItemsServices.getItemsByName(productName);
 
 	}
-	
-	@PutMapping("/updateitem")
-	public  ResponseEntity<Object> updateItem(@RequestBody OrderItemUpdateRequest orderItemUpdateRequest){
-		
-		System.err.println(orderItemUpdateRequest.toString());
-		OrderItem item = orderItemRepository.findById(orderItemUpdateRequest.getId()).get();
-		item.setQuantity(orderItemUpdateRequest.getQuantity());
-		orderItemRepository.save(item);
+
+	@PutMapping("/item/update")
+	public ResponseEntity<Object> updateItem(@RequestBody OrderItemUpdateRequest orderItemUpdateRequest) {
+		orderItemsServices.updateItem(orderItemUpdateRequest);
 		return ResponseEntity.noContent().build();
 	}
-	
+
 }

@@ -19,7 +19,7 @@ public class OrderItem implements Serializable {
 	private int id;
 	private String productCode;
 	private String productName;
-	private int quantity; // Assign Value like price of product
+	private int quantity; 
 
 	public int getId() {
 		return id;
