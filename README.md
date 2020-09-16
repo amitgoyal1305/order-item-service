@@ -1,4 +1,6 @@
-Services Endpoint For Order Items   
+# Services Endpoint For Order Items   
+
+# Get All Items Values
 
 GET -  http://localhost:8200/order/items
 
@@ -25,6 +27,7 @@ Response :
     }
 ]
 
+# Get Item by id
 
 GET -  http://localhost:8200/order/item/{id}   or   http://localhost:8200/order/item/11102 
 Response : 
@@ -35,6 +38,7 @@ Response :
     "quantity": 10
 }
 
+# Get Item by code
 GET -  http://localhost:8200/order/item/getbycode/{productcode}   or http://localhost:8200/order/item/getbycode/CR
 Response : 
 {
@@ -43,6 +47,8 @@ Response :
     "productName": "Card Reader",
     "quantity": 9
 }
+
+# Get Item by product name 
 
 GET -  http://localhost:8200/order/item/getitembyname/{productname}   or  http://localhost:8200/order/item/getitembyname/Pen%20Drive
 Response : 
@@ -53,6 +59,7 @@ Response :
     "quantity": 10
 }
 
+# update Item Object
 PUT -  http://localhost:8200/order/item/update
 Request Json : 
 	  {
